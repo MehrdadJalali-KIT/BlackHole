@@ -10,6 +10,24 @@ RDLogger.DisableLog('rdApp.*')
 
 logger = logging.getLogger(__name__)
 
+def derive_pld_category(pld):
+    """Derive PLD category based on Pore Limiting Diameter (Å)."""
+    try:
+        pld = float(pld)
+        if pd.isna(pld):
+            return 'nonporous'
+        if pld < 2.4:
+            return 'nonporous'
+        elif pld < 4.0:
+            return 'small pore'
+        elif pld < 8.0:
+            return 'medium pore'
+        else:
+            return 'large pore'
+    except (ValueError, TypeError):
+        logger.warning(f"Invalid PLD value: {pld}, using 'nonporous'")
+        return 'nonporous'
+
 def load_edges_list(filename):
     try:
         edges = pd.read_csv(filename)
@@ -50,6 +68,15 @@ def load_summary_data(filename, node_labels):
                 summary_data[col] = summary_data[col].fillna(summary_data[col].median())
         summary_data['linker SMILES'] = summary_data['linker SMILES'].replace('F[Si](F)(F)(F)(F)F', 'c1ccccc1').fillna('c1ccccc1')
         summary_data['metal'] = summary_data['metal'].fillna('Cu')
+        
+        # Derive PLD categories
+        if 'Pore Limiting Diameter' in summary_data.columns:
+            summary_data['category'] = summary_data['Pore Limiting Diameter'].apply(derive_pld_category)
+            category_counts = summary_data['category'].value_counts().to_dict()
+            logger.info(f"Derived PLD categories: {category_counts}")
+        else:
+            logger.error("Pore Limiting Diameter column missing, cannot derive PLD categories")
+            summary_data['category'] = 'nonporous'
         
         # Log data summary
         logger.info(f"Summary data rows: {len(summary_data)}, unique metals: {summary_data['metal'].nunique()}")
