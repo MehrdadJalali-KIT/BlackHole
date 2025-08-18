@@ -1,195 +1,225 @@
-# Black Hole Strategy for Graph Sparsification in Metal-Organic Framework Networks
-
 <div align="center">
-    <img src="BH2.png" alt="Black Hole Strategy in Metal-Organic Framework (MOF) Graph based on MOFGalaxyNet" width="400">
+    <img src="BH2.png" alt="Black Hole Strategy in MOF Networks" width="400">
+    <p><strong>Black Hole Strategy</strong>: A gravity-inspired graph sparsification approach for Metal-Organic Framework (MOF) networks.</p>
 </div>
 
-Blackhole (BH) is a graph sparsification strategy inspired by the concept of black holes in space — powerful regions that pull in nearby matter while leaving behind a simplified but structured system. Similarly, the BH algorithm "pulls in" essential connections in a network based on a gravity-like scoring mechanism, preserving influential edges and communities while pruning away weaker links. Unlike purely random methods, BH uses weighted edge importance and community detection (e.g., via the Louvain algorithm) to retain meaningful structure even under extreme pruning. The result is a significantly more stable and accurate graph for downstream learning tasks, especially in sparse regimes.
+<h1>Black Hole Strategy for Graph Sparsification in MOF Networks</h1>
 
+The <strong>Black Hole (BH)</strong> strategy is a novel graph sparsification technique inspired by the gravitational pull of black holes, which condense matter into highly structured forms. BH retains the most influential nodes and edges in a network using a gravity-like scoring mechanism, preserving critical connections and community structures (via the <strong>Louvain algorithm</strong>). Unlike random pruning, BH ensures stable and accurate graph representations, even under extreme sparsity, making it ideal for downstream learning tasks in sparse regimes.
 
 <div align="center">
-    <img src="Animated_BH_txt_shorter.gif" alt="Black Hole Strategy in Metal-Organic Framework (MOF) Graph based on MOFGalaxyNet" width="400">
+    <img src="Animated_BH_txt_shorter.gif" alt="Animation of Black Hole Sparsification" width="400">
 </div>
 
-### How it Works
-**Black Hole (BH)** is a graph sparsification strategy inspired by the concept of black holes in space—gravitational centers that draw in surrounding matter while leaving behind a highly condensed structure. Analogously, the BH algorithm retains the most influential nodes and connections in a graph through a gravity-inspired scoring mechanism, resulting in a sparse yet structurally meaningful network.
+<h2>About the Project</h2>
 
-Unlike random pruning methods, BH incorporates **weighted edge importance** and **community structure** (via the **Louvain algorithm**) to guide sparsification. The result is a **much more stable and accurate graph representation**, particularly under high sparsity conditions. 
+The <strong>Black Hole Strategy</strong> is implemented within the <strong>MOFGalaxyNet</strong> framework, designed for analyzing Metal-Organic Framework (MOF) networks. It leverages <strong>weighted edge importance</strong> and <strong>community detection</strong> to sparsify graphs while maintaining structural integrity, outperforming traditional methods like random pruning or edge betweenness centrality.
 
-## MOFGalaxyNet and Black Hole Strategy
-**MOFGalaxyNet**: To access the related code for MOFGalaxyNet, visit the following GitHub repository:
+For the full MOFGalaxyNet code, visit:  
+<a href="https://github.com/MehrdadJalali-KIT/MOFGalaxyNet">MehrdadJalali-AI/MOFGalaxyNet</a>
 
-[MehrdadJalali-AI/MOFGalaxyNet](https://github.com/MehrdadJalali-KIT/MOFGalaxyNet)
+For more details about the project and my work, visit my personal website:  
+<a href="https://www.mehrdadjalali.de">www.mehrdadjalali.de</a>
 
-Modules Overview
+<h2>Key Features</h2>
 
-| File                                | Purpose                                                                                                 |
-| ----------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| **main.py**                         | Orchestrates the full pipeline: loads data, applies Black Hole sparsification, and trains GraphSAGE.    |
-| **data\_utils.py**                  | Loads datasets, preprocesses node features, handles RDKit fingerprint generation and cleanup.           |
-| **graphsage\_model.py**             | Defines the GraphSAGE neural network and training routines.                                             |
-| **bh\_sparsification.py**           | Implements the Black Hole sparsification algorithm (gravity-based edge importance + pruning).           |
-| **experiment\_manager.py**          | Handles experiment setup, checkpointing, logging, and saving of results.                                |
-| **sparsification\_methods.py**      | Includes alternative sparsification strategies (e.g., random pruning, edge betweenness) for comparison. |
-| **LinkerDistribuation.py**          | Analyzes and visualizes distribution of organic linkers in MOFs.                                        |
-| **MetalDistribuation.py**           | Analyzes and visualizes distribution of metals in MOFs.                                                 |
-| **Performance\_Frugal\_overall.py** | Runs benchmarking across sparsification methods and summarizes performance metrics.                     |
-| **sparsification\_performance.csv** | Stores precomputed results of sparsification performance (accuracy, modularity, runtime, etc.).         |
+<ul>
+    <li><strong>Gravity-Inspired Sparsification</strong>: Uses a scoring mechanism to prioritize influential edges and nodes.</li>
+    <li><strong>Community обслуживание</strong>: Integrates Louvain algorithm for robust community detection.</li>
+    <li><strong>High Stability in Sparse Regimes</strong>: Maintains graph accuracy for downstream tasks like GraphSAGE training.</li>
+    <li><strong>Comprehensive Analysis Tools</strong>: Includes modules for visualizing MOF properties (e.g., linker and metal distributions, pore-limiting diameters).</li>
+</ul>
 
-Analysis & Plotting Modules
+<h2>Repository Structure</h2>
 
-| File                                   | Purpose                                                                                                      |
-| -------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| **analyze\_sparsified\_graphs\_v2.py** | Analyzes properties of sparsified graphs and compares methods across thresholds.                             |
-| **PlotNetworkParameters.py**           | Plots network parameters (e.g., degree distribution, modularity, path length) across sparsification methods. |
-| **PlotNetworkParameters\_OnlyBH.py**   | Same as above but restricted to Black Hole results only.                                                     |
-| **PlotParameters.py**                  | General-purpose plotting of sparsification metrics such as accuracy, modularity, runtime.                    |
-| **Plot\_Redundency.py**                | Plots redundancy and overlap metrics across sparsification thresholds.                                       |
-| **PLDdistribuation.py**                | Visualizes pore-limiting diameter (PLD) distributions in MOFs.                                               |
-| **plot\_network\_metrics.py**          | Generates plots for overall network metrics (e.g., density, clustering, transitivity).                       |
+<h3>Core Modules</h3>
+<table>
+    <tr>
+        <th>File</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td><code>main.py</code></td>
+        <td>Orchestrates the pipeline: data loading, BH sparsification, GraphSAGE training.</td>
+    </tr>
+    <tr>
+        <td><code>data_utils.py</code></td>
+        <td>Loads and preprocesses data, generates RDKit fingerprints, and cleans features.</td>
+    </tr>
+    <tr>
+        <td><code>graphsage_model.py</code></td>
+        <td>Defines and trains the GraphSAGE neural network.</td>
+    </tr>
+    <tr>
+        <td><code>bh_sparsification.py</code></td>
+        <td>Implements the Black Hole sparsification algorithm.</td>
+    </tr>
+    <tr>
+        <td><code>experiment_manager.py</code></td>
+        <td>Manages experiments, logging, checkpoints, and result storage.</td>
+    </tr>
+    <tr>
+        <td><code>sparsification_methods.py</code></td>
+        <td>Provides alternative sparsification methods for comparison (e.g., random pruning).</td>
+    </tr>
+</table>
 
+<h3>Analysis & Visualization Modules</h3>
+<table>
+    <tr>
+        <th>File</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td><code>LinkerDistribuation.py</code></td>
+        <td>Visualizes the distribution of organic linkers in MOFs.</td>
+    </tr>
+    <tr>
+        <td><code>MetalDistribuation.py</code></td>
+        <td>Visualizes the distribution of metals in MOFs.</td>
+    </tr>
+    <tr>
+        <td><code>PLDdistribuation.py</code></td>
+        <td>Visualizes pore-limiting diameter (PLD) distributions in MOFs.</td>
+    </tr>
+    <tr>
+        <td><code>analyze_sparsified_graphs_v2.py</code></td>
+        <td>Analyzes properties of sparsified graphs across methods and thresholds.</td>
+    </tr>
+    <tr>
+        <td><code>PlotNetworkParameters.py</code></td>
+        <td>Plots network metrics (e.g., degree distribution, modularity).</td>
+    </tr>
+    <tr>
+        <td><code>PlotParameters.py</code></td>
+        <td>Plots sparsification metrics (accuracy, modularity, runtime).</td>
+    </tr>
+    <tr>
+        <td><code>Plot_Redundency.py</code></td>
+        <td>Visualizes redundancy and overlap metrics across sparsification thresholds.</td>
+    </tr>
+    <tr>
+        <td><code>plot_network_metrics.py</code></td>
+        <td>Generates plots for network metrics (e.g., density, clustering).</td>
+    </tr>
+    <tr>
+        <td><code>Performance_Frugal_overall.py</code></td>
+        <td>Benchmarks and summarizes performance across sparsification methods.</td>
+    </tr>
+</table>
 
-## Installation
-The project uses Python 3.9 and Conda. Follow these steps to set up the environment:
+<h3>Data Files</h3>
+<ul>
+    <li><code>MOFGalaxyNet.csv</code>: Edge list for MOF network (829,300 edges, not included).</li>
+    <li><code>MOFCSD.csv</code>: Node features for MOFs (12,561 nodes, not included).</li>
+    <li><code>sparsification_performance.csv</code>: Stores evaluation metrics (accuracy, modularity, runtime).</li>
+    <li><code>BH.jpg</code> & <code>Animated_BH_txt_shorter.gif</code>: Visuals for README.</li>
+</ul>
 
-1. **Create a Conda environment**:
-   ```bash
-   conda create -n bh_env python=3.9
-   conda activate bh_env
-   ```
+<h2>Installation</h2>
 
-2. **Install dependencies**:
-   ```bash
-   conda install pytorch==2.4.0 pandas numpy networkx scikit-learn rdkit psutil -c pytorch -c conda-forge
-   pip install tqdm
-   ```
-   **Note**: If RDKit version is <2024.03, deprecation warnings for `AllChem.GetMorganFingerprintAsBitVect` are suppressed in `data_utils.py`. To avoid warnings, update RDKit:
-   ```bash
-   conda install rdkit>=2024.03 -c conda-forge
-   ```
-   Then update `data_utils.py` to use `MorganGenerator.GetFingerprintAsNumPy` (see [Troubleshooting](#troubleshooting)).
+<h3>Prerequisites</h3>
+<ul>
+    <li>Python 3.9</li>
+    <li>Conda</li>
+    <li>Required packages: <code>pytorch==2.4.0</code>, <code>pandas</code>, <code>numpy</code>, <code>networkx</code>, <code>scikit-learn</code>, <code>rdkit>=2024.03</code>, <code>psutil</code>, <code>tqdm</code></li>
+</ul>
 
-3. **Clone the repository**:
-   ```bash
-   git clone https://github.com/MehrdadJalali-KIT/black-hole-strategy.git
-   cd black-hole-strategy
-   ```
+<h3>Setup Instructions</h3>
+<ol>
+    <li><strong>Create a Conda environment</strong>:
+        <pre><code>conda create -n bh_env python=3.9
+conda activate bh_env</code></pre>
+    </li>
+    <li><strong>Install dependencies</strong>:
+        <pre><code>conda install pytorch==2.4.0 pandas numpy networkx scikit-learn rdkit psutil -c pytorch -c conda-forge
+pip install tqdm</code></pre>
+    </li>
+    <li><strong>Clone the repository</strong>:
+        <pre><code>git clone https://github.com/MehrdadJalali-KIT/black-hole-strategy.git
+cd black-hole-strategy</code></pre>
+    </li>
+</ol>
 
-## Usage
-Place `MOFGalaxyNet.csv`, `MOFCSD.csv`, `BH.jpg`, and `Animated_BH_txt_shorter.gif` in the project root. Then run:
+<p><strong>Note</strong>: For RDKit >=2024.03, update <code>data_utils.py</code> to use <code>MorganGenerator.GetFingerprintAsNumPy</code> to avoid deprecation warnings. See <a href="#troubleshooting">Troubleshooting</a> for details.</p>
 
-```bash
-conda activate bh_env
+<h2>Usage</h2>
+
+<ol>
+    <li><strong>Prepare data</strong>: Place <code>MOFGalaxyNet.csv</code>, <code>MOFCSD.csv</code>, <code>BH.jpg</code>, and <code>Animated_BH_txt_shorter.gif</code> in the project root.</li>
+    <li><strong>Run the pipeline</strong>:
+        <pre><code>conda activate bh_env
 rm -rf __pycache__ *.pyc
-python main.py
-```
+python main.py</code></pre>
+    </li>
+    <li><strong>Monitor progress</strong>:
+        <pre><code>tail -f bh_evaluation.log</code></pre>
+    </li>
+</ol>
 
-**Monitor progress**:
-```bash
-tail -f bh_evaluation.log
-```
+<h3>Expected Output</h3>
+<ul>
+    <li><strong>Logs</strong>: Feature generation (<code>[12561, 1031]</code>), training progress (e.g., <code>Epoch X, Loss: Y, Train Accuracy: Z</code>), and test accuracy (0.6–0.8).</li>
+    <li><strong>Results</strong>: Stored in <code>evaluation/threshold_0.90/method_{blackhole,random}/run_0/model_results_with_error_bars.csv</code>.</li>
+    <li><strong>Run Time</strong>: ~10 minutes on a typical CPU (e.g., Apple Silicon).</li>
+</ul>
 
-**Expected output**:
-- Logs: “Generated features with shape [12561, 1031]”, “Epoch X, Loss: Y, Train Accuracy: Z” (train accuracy >0.5), “Test Accuracy: W” (0.6-0.8).
-- Results: `evaluation/threshold_0.90/method_{blackhole,random}/run_0/model_results_with_error_bars.csv`.
-- Run time: ~10 minutes on a typical CPU (e.g., Apple Silicon).
+<h3>Optional: Test Without Edge Weights</h3>
+<p>To match previous versions, edit <code>main.py</code>:</p>
+<pre><code>use_edge_weights = False</code></pre>
+<p>Then run:</p>
+<pre><code>python main.py</code></pre>
 
-**Test without edge weights** (to match previous version):
-```bash
-# Edit main.py, set: use_edge_weights = False
-python main.py
-```
+<h2>Troubleshooting</h2>
 
-## File Structure
-```
-black-hole-strategy/
-├── main.py                     # Entry point: runs BH sparsification + GraphSAGE training pipeline
-├── data_utils.py               # Handles data loading, preprocessing, feature generation (RDKit, MOF features)
-├── graphsage_model.py          # Defines and trains the custom GraphSAGE model
-├── bh_sparsification.py        # Implements the Black Hole sparsification algorithm (gravity scoring, pruning)
-├── experiment_manager.py       # Manages experiments, logging, checkpoints, result saving
-├── sparsification_methods.py   # Contains additional sparsification strategies (e.g., random, EBC) for comparison
-├── LinkerDistribuation.py      # Visualization of linker distribution across MOFs
-├── MetalDistribuation.py       # Visualization of metal distribution across MOFs
-├── Performance_Frugal_overall.py  # Benchmarking & performance evaluation across sparsification methods
-├── sparsification_performance.csv # CSV with recorded evaluation metrics (accuracy, modularity, runtime, etc.)
-├── MOFGalaxyNet.csv            # Edge list (829,300 edges) [Not included]
-├── MOFCSD.csv                  # Node features (12,561 nodes) [Not included]
-├── BH.jpg                      # Static image for README
-├── Animated_BH_txt_shorter.gif # Animation for README
-├── bh_evaluation.log           # Log file
-├── bh_evaluation_checkpoint.json # Checkpoint file
-├── sparsified_graphs/          # Sparsified edge lists
-└── evaluation/                 # Results (accuracy, modularity, etc.)
+<ol>
+    <li><strong>Check Logs</strong>:
+        <pre><code>tail -f bh_evaluation.log</code></pre>
+        <p>Verify: Feature shape <code>[12561, 1031]</code>, test accuracy >0.5, no feature shape mismatches.</p>
+    </li>
+    <li><strong>Validate Data</strong>:
+        <pre><code>import pandas as pd
+summary = pd.read_csv('MOFCSD.csv')
+print(f"Invalid SMILES: {(summary['linker SMILES'] == 'F[Si](F)(F)(F)(F)F').sum()}")
+print(f"Metals: {summary['metal'].value_counts()}")
+print(f"NaNs: {summary[['Pore Limiting Diameter', 'Largest Cavity Diameter', 'Largest Free Sphere']].isna().sum()}")</code></pre>
+    </li>
+    <li><strong>Test Data Loading</strong>:
+        <pre><code>from data_utils import load_summary_data
+edges = pd.read_csv('MOFGalaxyNet.csv')
+nodes = pd.concat([edges['source'], edges['target']]).unique()
+features_df, summary_data = load_summary_data('MOFCSD.csv', nodes)
+print(features_df.shape)  # Should be (12561, 1031)</code></pre>
+    </li>
+    <li><strong>RDKit Version</strong>:
+        <pre><code>python -c "from rdkit import __version__; print(__version__)"</code></pre>
+        <p>If <2024.03, update RDKit and modify <code>data_utils.py</code> to use <code>MorganGenerator</code>.</p>
+    </li>
+</ol>
 
-```
+<h2>Known Issues</h2>
 
-## Requirements
-Specific package versions used:
-```
-python==3.9
-pytorch==2.4.0
-pandas
-numpy
-networkx
-scikit-learn
-rdkit>=2023.09.5,<2024.03  # Update to >=2024.03 for MorganGenerator
-psutil
-tqdm
-```
+<ul>
+    <li><strong>RDKit Deprecation</strong>: Older RDKit versions (<2024.03) trigger warnings for <code>AllChem.GetMorganFingerprintAsBitVect</code>. Update RDKit and use <code>MorganGenerator</code>.</li>
+    <li><strong>Invalid SMILES</strong>: <code>F[Si](F)(F)(F)(F)F</code> in <code>MOFCSD.csv</code> is replaced with <code>c1ccccc1</code> (benzene) during preprocessing.</li>
+    <li><strong>Low Accuracy</strong>: Accuracy may be lower than previous versions (>0.5). Test with <code>use_edge_weights = False</code>.</li>
+    <li><strong>Modularity</strong>: Black Hole partition may fall back to Louvain (modularity ~0.4075) if invalid.</li>
+</ul>
 
-See `requirements.txt` for details. Install using:
-```bash
-conda install --file requirements.txt -c pytorch -c conda-forge
-pip install tqdm
-```
+<h2>Contributing</h2>
 
-## Known Issues
-- **RDKit Deprecation**: If RDKit <2024.03, `AllChem.GetMorganFingerprintAsBitVect` triggers warnings, suppressed in `data_utils.py` using `RDLogger.DisableLog('rdApp.*')`. Update RDKit to resolve.
-- **Invalid SMILES**: `F[Si](F)(F)(F)(F)F` in `MOFCSD.csv` is replaced with benzene (`c1ccccc1`). Preprocess data to minimize random features.
-- **Dimension Mismatch**: Fixed in `data_utils.py` by ensuring 1D `other_features` and validating feature shapes ([1031]).
-- **Low Accuracy**: Current version may yield lower accuracy than previous version (>0.5). Test with `use_edge_weights = False`.
-- **Modularity**: Black Hole partition may be invalid, falling back to Louvain (modularity ~0.4075).
+<p>Contributions are welcome! Please submit issues or pull requests to:</p>
+<ul>
+    <li>Fix invalid SMILES in <code>MOFCSD.csv</code>.</li>
+    <li>Enhance Black Hole partition modularity in <code>bh_sparsification.py</code>.</li>
+    <li>Optimize GraphSAGE for better accuracy with edge weights.</li>
+</ul>
 
-## Troubleshooting
-1. **Check logs**:
-   ```bash
-   tail -f bh_evaluation.log
-   ```
-   Look for: “Generated features with shape [12561, 1031]”, “Test Accuracy: W” (>0.5), “Feature shape mismatch”.
+<h2>License</h2>
 
-2. **Verify data**:
-   ```python
-   import pandas as pd
-   summary = pd.read_csv('MOFCSD.csv')
-   print(f"Invalid SMILES: {(summary['linker SMILES'] == 'F[Si](F)(F)(F)(F)F').sum()}")
-   print(f"Metals: {summary['metal'].value_counts()}")
-   print(f"NaNs: {summary[['Pore Limiting Diameter', 'Largest Cavity Diameter', 'Largest Free Sphere']].isna().sum()}")
-   ```
+<p>This project is licensed under the MIT License. See <a href="LICENSE">LICENSE</a> for details.</p>
 
-3. **Test data loading**:
-   ```python
-   from data_utils import load_summary_data
-   edges = pd.read_csv('MOFGalaxyNet.csv')
-   nodes = pd.concat([edges['source'], edges['target']]).unique()
-   features_df, summary_data = load_summary_data('MOFCSD.csv', nodes)
-   print(features_df.shape)  # Should be (12561, 1031)
-   ```
+<h2>Contact</h2>
 
-4. **RDKit version**:
-   ```bash
-   python -c "from rdkit import __version__; print(__version__)"
-   ```
-   If <2024.03, update and use `MorganGenerator` (contact maintainer for updated `data_utils.py`).
-
-## Contributing
-Contributions are welcome! Please submit issues or pull requests. Key areas for improvement:
-- Fix invalid SMILES in `MOFCSD.csv`.
-- Improve Black Hole partition modularity in `bh_sparsification.py`.
-- Optimize GraphSAGE for higher accuracy with edge weights.
-
-## License
-MIT License. See [LICENSE](LICENSE) for details.
-
-## Contact
-
+<p>For questions or collaboration, reach out via GitHub or visit my website for more information:  
+<a href="https://www.mehrdadjalali.de">www.mehrdadjalali.de</a></p>
