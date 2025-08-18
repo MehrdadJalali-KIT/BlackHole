@@ -21,6 +21,33 @@ Unlike random pruning methods, BH incorporates **weighted edge importance** and 
 
 [MehrdadJalali-AI/MOFGalaxyNet](https://github.com/MehrdadJalali-KIT/MOFGalaxyNet)
 
+Modules Overview
+
+| File                                | Purpose                                                                                                 |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| **main.py**                         | Orchestrates the full pipeline: loads data, applies Black Hole sparsification, and trains GraphSAGE.    |
+| **data\_utils.py**                  | Loads datasets, preprocesses node features, handles RDKit fingerprint generation and cleanup.           |
+| **graphsage\_model.py**             | Defines the GraphSAGE neural network and training routines.                                             |
+| **bh\_sparsification.py**           | Implements the Black Hole sparsification algorithm (gravity-based edge importance + pruning).           |
+| **experiment\_manager.py**          | Handles experiment setup, checkpointing, logging, and saving of results.                                |
+| **sparsification\_methods.py**      | Includes alternative sparsification strategies (e.g., random pruning, edge betweenness) for comparison. |
+| **LinkerDistribuation.py**          | Analyzes and visualizes distribution of organic linkers in MOFs.                                        |
+| **MetalDistribuation.py**           | Analyzes and visualizes distribution of metals in MOFs.                                                 |
+| **Performance\_Frugal\_overall.py** | Runs benchmarking across sparsification methods and summarizes performance metrics.                     |
+| **sparsification\_performance.csv** | Stores precomputed results of sparsification performance (accuracy, modularity, runtime, etc.).         |
+
+Analysis & Plotting Modules
+
+| File                                   | Purpose                                                                                                      |
+| -------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| **analyze\_sparsified\_graphs\_v2.py** | Analyzes properties of sparsified graphs and compares methods across thresholds.                             |
+| **PlotNetworkParameters.py**           | Plots network parameters (e.g., degree distribution, modularity, path length) across sparsification methods. |
+| **PlotNetworkParameters\_OnlyBH.py**   | Same as above but restricted to Black Hole results only.                                                     |
+| **PlotParameters.py**                  | General-purpose plotting of sparsification metrics such as accuracy, modularity, runtime.                    |
+| **Plot\_Redundency.py**                | Plots redundancy and overlap metrics across sparsification thresholds.                                       |
+| **PLDdistribuation.py**                | Visualizes pore-limiting diameter (PLD) distributions in MOFs.                                               |
+| **plot\_network\_metrics.py**          | Generates plots for overall network metrics (e.g., density, clustering, transitivity).                       |
+
 
 ## Installation
 The project uses Python 3.9 and Conda. Follow these steps to set up the environment:
@@ -76,19 +103,25 @@ python main.py
 ## File Structure
 ```
 black-hole-strategy/
-├── main.py                 # Main script for Black Hole sparsification and GraphSAGE training
-├── data_utils.py           # Data loading and feature generation
-├── graphsage_model.py      # Custom GraphSAGE model implementation
-├── bh_sparsification.py    # Black Hole sparsification logic
-├── experiment_manager.py   # Checkpointing and result saving
-├── MOFGalaxyNet.csv        # Edge list (829,300 edges) [Not included]
-├── MOFCSD.csv             # Node features (12,561 nodes) [Not included]
-├── BH.jpg                 # Static image for README
-├── Animated_BH_txt_shorter.gif  # Animation for README
-├── bh_evaluation.log      # Log file
-├── bh_evaluation_checkpoint.json  # Checkpoint file
-├── sparsified_graphs/     # Sparsified edge lists
-└── evaluation/            # Results (accuracy, modularity, etc.)
+├── main.py                     # Entry point: runs BH sparsification + GraphSAGE training pipeline
+├── data_utils.py               # Handles data loading, preprocessing, feature generation (RDKit, MOF features)
+├── graphsage_model.py          # Defines and trains the custom GraphSAGE model
+├── bh_sparsification.py        # Implements the Black Hole sparsification algorithm (gravity scoring, pruning)
+├── experiment_manager.py       # Manages experiments, logging, checkpoints, result saving
+├── sparsification_methods.py   # Contains additional sparsification strategies (e.g., random, EBC) for comparison
+├── LinkerDistribuation.py      # Visualization of linker distribution across MOFs
+├── MetalDistribuation.py       # Visualization of metal distribution across MOFs
+├── Performance_Frugal_overall.py  # Benchmarking & performance evaluation across sparsification methods
+├── sparsification_performance.csv # CSV with recorded evaluation metrics (accuracy, modularity, runtime, etc.)
+├── MOFGalaxyNet.csv            # Edge list (829,300 edges) [Not included]
+├── MOFCSD.csv                  # Node features (12,561 nodes) [Not included]
+├── BH.jpg                      # Static image for README
+├── Animated_BH_txt_shorter.gif # Animation for README
+├── bh_evaluation.log           # Log file
+├── bh_evaluation_checkpoint.json # Checkpoint file
+├── sparsified_graphs/          # Sparsified edge lists
+└── evaluation/                 # Results (accuracy, modularity, etc.)
+
 ```
 
 ## Requirements
